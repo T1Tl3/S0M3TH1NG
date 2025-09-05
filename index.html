@@ -1,1 +1,368 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopThai - ร้านค้าออนไลน์</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Kanit', sans-serif; }
+        .product-card:hover { transform: translateY(-4px); }
+        .cart-badge { animation: bounce 0.5s ease-in-out; }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">S</span>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-800">ShopThai</h1>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">หน้าแรก</a>
+                    <a href="#products" class="text-gray-600 hover:text-blue-600 transition-colors">สินค้า</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">เกี่ยวกับเรา</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">ติดต่อ</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <button class="relative p-2 text-gray-600 hover:text-blue-600 transition-colors" onclick="toggleCart()">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9m-9 0V19a2 2 0 002 2h7a2 2 0 002-2v-.5"></path>
+                        </svg>
+                        <span id="cartCount" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center cart-badge hidden">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 to-purple-700 text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-5xl font-bold mb-6">ยินดีต้อนรับสู่ ShopThai</h2>
+            <p class="text-xl mb-8 opacity-90">ค้นพบสินค้าคุณภาพดีในราคาที่คุ้มค่า</p>
+            <button onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})" class="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
+                เริ่มช้อปปิ้ง
+            </button>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-16">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold text-center mb-12 text-gray-800">สินค้าแนะนำ</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Product 1 -->
+                <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300">
+                    <div class="h-48 bg-gradient-to-br from-pink-200 to-pink-300 flex items-center justify-center">
+                        <span class="text-6xl">👕</span>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-lg font-semibold mb-2">เสื้อยืดคุณภาพดี</h4>
+                        <p class="text-gray-600 mb-4">เสื้อยืดผ้าคอตตอน 100% นุ่มสบาย</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-blue-600">฿299</span>
+                            <button onclick="addToCart('เสื้อยืดคุณภาพดี', 299)" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                เพิ่มลงตะกร้า
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300">
+                    <div class="h-48 bg-gradient-to-br from-blue-200 to-blue-300 flex items-center justify-center">
+                        <span class="text-6xl">👖</span>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-lg font-semibold mb-2">กางเกงยีนส์</h4>
+                        <p class="text-gray-600 mb-4">กางเกงยีนส์ทรงสวย ใส่สบาย</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-blue-600">฿799</span>
+                            <button onclick="addToCart('กางเกงยีนส์', 799)" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                เพิ่มลงตะกร้า
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300">
+                    <div class="h-48 bg-gradient-to-br from-green-200 to-green-300 flex items-center justify-center">
+                        <span class="text-6xl">👟</span>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-lg font-semibold mb-2">รองเท้าผ้าใบ</h4>
+                        <p class="text-gray-600 mb-4">รองเท้าผ้าใบสไตล์สปอร์ต</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-blue-600">฿1,299</span>
+                            <button onclick="addToCart('รองเท้าผ้าใบ', 1299)" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                เพิ่มลงตะกร้า
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300">
+                    <div class="h-48 bg-gradient-to-br from-purple-200 to-purple-300 flex items-center justify-center">
+                        <span class="text-6xl">🎒</span>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-lg font-semibold mb-2">กระเป๋าเป้</h4>
+                        <p class="text-gray-600 mb-4">กระเป๋าเป้สำหรับเดินทาง</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-blue-600">฿899</span>
+                            <button onclick="addToCart('กระเป๋าเป้', 899)" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                เพิ่มลงตะกร้า
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300">
+                    <div class="h-48 bg-gradient-to-br from-yellow-200 to-yellow-300 flex items-center justify-center">
+                        <span class="text-6xl">⌚</span>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-lg font-semibold mb-2">นาฬิกาข้อมือ</h4>
+                        <p class="text-gray-600 mb-4">นาฬิกาดีไซน์สวย ทันสมัย</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-blue-600">฿1,599</span>
+                            <button onclick="addToCart('นาฬิกาข้อมือ', 1599)" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                เพิ่มลงตะกร้า
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300">
+                    <div class="h-48 bg-gradient-to-br from-red-200 to-red-300 flex items-center justify-center">
+                        <span class="text-6xl">🧢</span>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-lg font-semibold mb-2">หมวกแก๊ป</h4>
+                        <p class="text-gray-600 mb-4">หมวกแก๊ปสไตล์เท่ห์</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-blue-600">฿399</span>
+                            <button onclick="addToCart('หมวกแก๊ป', 399)" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                เพิ่มลงตะกร้า
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-lg max-w-md w-full p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-bold">ตะกร้าสินค้า</h3>
+                    <button onclick="toggleCart()" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div id="cartItems" class="space-y-3 mb-4">
+                    <p class="text-gray-500 text-center py-8">ตะกร้าสินค้าว่างเปล่า</p>
+                </div>
+                
+                <div id="cartTotal" class="border-t pt-4 hidden">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="font-semibold">รวมทั้งหมด:</span>
+                        <span id="totalAmount" class="text-xl font-bold text-blue-600">฿0</span>
+                    </div>
+                    <button onclick="checkout()" class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition-colors font-semibold">
+                        สั่งซื้อสินค้า
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">ShopThai</h4>
+                    <p class="text-gray-300">ร้านค้าออนไลน์ที่มีสินค้าคุณภาพดีในราคาที่คุ้มค่า</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">ลิงก์ด่วน</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white transition-colors">หน้าแรก</a></li>
+                        <li><a href="#products" class="hover:text-white transition-colors">สินค้า</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">เกี่ยวกับเรา</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">ติดต่อ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">ติดต่อเรา</h4>
+                    <div class="text-gray-300 space-y-2">
+                        <p>📧 info@shopthai.com</p>
+                        <p>📞 02-123-4567</p>
+                        <p>📍 กรุงเทพมหานคร ประเทศไทย</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
+                <p>&copy; 2024 ShopThai. สงวนลิขสิทธิ์.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let cart = [];
+        let cartCount = 0;
+
+        function addToCart(productName, price) {
+            const existingItem = cart.find(item => item.name === productName);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    name: productName,
+                    price: price,
+                    quantity: 1
+                });
+            }
+            
+            cartCount++;
+            updateCartDisplay();
+            
+            // Show success message
+            showNotification(`เพิ่ม "${productName}" ลงตะกร้าแล้ว!`);
+        }
+
+        function removeFromCart(productName) {
+            const itemIndex = cart.findIndex(item => item.name === productName);
+            if (itemIndex > -1) {
+                const item = cart[itemIndex];
+                cartCount -= item.quantity;
+                cart.splice(itemIndex, 1);
+                updateCartDisplay();
+            }
+        }
+
+        function updateCartDisplay() {
+            const cartCountElement = document.getElementById('cartCount');
+            const cartItemsElement = document.getElementById('cartItems');
+            const cartTotalElement = document.getElementById('cartTotal');
+            const totalAmountElement = document.getElementById('totalAmount');
+
+            // Update cart count badge
+            if (cartCount > 0) {
+                cartCountElement.textContent = cartCount;
+                cartCountElement.classList.remove('hidden');
+                cartCountElement.classList.add('cart-badge');
+            } else {
+                cartCountElement.classList.add('hidden');
+            }
+
+            // Update cart items
+            if (cart.length === 0) {
+                cartItemsElement.innerHTML = '<p class="text-gray-500 text-center py-8">ตะกร้าสินค้าว่างเปล่า</p>';
+                cartTotalElement.classList.add('hidden');
+            } else {
+                let cartHTML = '';
+                let total = 0;
+
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    
+                    cartHTML += `
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div class="flex-1">
+                                <h5 class="font-medium">${item.name}</h5>
+                                <p class="text-sm text-gray-600">฿${item.price.toLocaleString()} x ${item.quantity}</p>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="font-semibold">฿${itemTotal.toLocaleString()}</span>
+                                <button onclick="removeFromCart('${item.name}')" class="text-red-500 hover:text-red-700">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                cartItemsElement.innerHTML = cartHTML;
+                totalAmountElement.textContent = `฿${total.toLocaleString()}`;
+                cartTotalElement.classList.remove('hidden');
+            }
+        }
+
+        function toggleCart() {
+            const cartModal = document.getElementById('cartModal');
+            cartModal.classList.toggle('hidden');
+        }
+
+        function checkout() {
+            if (cart.length === 0) return;
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const orderSummary = cart.map(item => `${item.name} x${item.quantity}`).join('\n');
+            
+            alert(`ขอบคุณสำหรับการสั่งซื้อ!\n\nรายการสินค้า:\n${orderSummary}\n\nยอดรวม: ฿${total.toLocaleString()}\n\nเรากำลังดำเนินการจัดส่งสินค้าให้คุณ`);
+            
+            // Clear cart
+            cart = [];
+            cartCount = 0;
+            updateCartDisplay();
+            toggleCart();
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-20 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300';
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 100);
+            
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Close cart when clicking outside
+        document.getElementById('cartModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                toggleCart();
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97a3faa363b1893b',t:'MTc1NzA1Njk4My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
 
